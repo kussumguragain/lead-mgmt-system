@@ -53,52 +53,14 @@ $totalLeads = $row['total'];
 <body>
 
 <!-- Top Navbar -->
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <span class="navbar-brand">Admin Dashboard</span>
-    <div class="d-flex align-items-center">
-      <span class="text-white me-3">Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-      <a class="btn btn-outline-light btn-sm" href="logout.php">
-        <i class="bi bi-box-arrow-right"></i> Logout
-      </a>
-    </div>
-  </div>
-</nav>
+<?php 
+include 'common/topbar.php';
+?>
 
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-      <div class="position-sticky pt-3 bg-dark vh-100">
-        <ul class="nav flex-column px-3">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">
-              <i class="bi bi-house-door"></i> Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="manage_agents/manage_agents.php">
-              <i class="bi bi-person-lines-fill"></i> Manage Agents
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="manage_leads/view_leads.php">
-              <i class="bi bi-list-task"></i> Manage Leads
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="manage_leads/view_leads.php">
-              <i class="bi bi-list-task"></i> View Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="bi bi-gear"></i> Settings
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+     <?php include 'common/sidebar.php';?>
 
     <!-- Main Content -->
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">

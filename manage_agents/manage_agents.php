@@ -20,9 +20,46 @@ $result = $conn->query($sql);
   <meta charset="UTF-8" />
   <title>Manage Agents | Admin Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Custom styles (copied from dashboard) -->
+<style>
+  body {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+  }
+  .sidebar {
+    min-height: 100vh;
+    background-color: #343a40;
+  }
+  .sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  .sidebar a:hover {
+    background-color: #495057;
+  }
+  .sidebar .nav-link.active {
+    background-color: #007bff;
+  }
+  .content {
+    padding: 20px;
+  }
+</style>
+
 </head>
 <body>
-<div class="container mt-4">
+<?php include '../common/topbar.php'; ?>
+
+<div class="container-fluid">
+  <div class="row">
+    <?php include '../common/sidebar.php'; ?>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content mt-4">
+
   <h2>
   <a href="../admin_dashboard.php" style="text-decoration: none; color: inherit;">
     Manage Agents
@@ -70,5 +107,9 @@ $result = $conn->query($sql);
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </main>
+  </div>
+</div>
+
 </body>
 </html>
