@@ -1,0 +1,64 @@
+/* Reset and base styles */
+body {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar styling */
+.sidebar {
+  min-height: 100vh;
+  background-color: #343a40;
+  padding-top: 20px;
+}
+
+.sidebar a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 4px;
+}
+
+.sidebar a:hover {
+  background-color: #495057;
+}
+
+.sidebar .nav-link.active {
+  background-color: #007bff;
+}
+
+/* Topbar styling */
+.navbar-dark {
+  background-color: #212529;
+}
+
+/* Main content area */
+.content {
+  padding: 20px;
+}
+
+/* Cards */
+.card-title {
+  font-weight: bold;
+}
+
+/* Centered form layout */
+.form-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    min-height: auto;
+  }
+
+  .form-wrapper {
+    padding: 0 15px;
+  }
+}

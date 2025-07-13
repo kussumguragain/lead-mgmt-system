@@ -27,29 +27,7 @@ $result = $conn->query($sql);
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
 <!-- Custom styles (copied from dashboard) -->
-<style>
-  body {
-    min-height: 100vh;
-    background-color: #f8f9fa;
-  }
-  .sidebar {
-    min-height: 100vh;
-    background-color: #343a40;
-  }
-  .sidebar a {
-    color: #ffffff;
-    text-decoration: none;
-  }
-  .sidebar a:hover {
-    background-color: #495057;
-  }
-  .sidebar .nav-link.active {
-    background-color: #007bff;
-  }
-  .content {
-    padding: 20px;
-  }
-</style>
+<link rel="stylesheet" href="/lead-management-system/css/style.css">
 
 </head>
 <body>

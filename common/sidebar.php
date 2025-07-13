@@ -2,17 +2,17 @@
       <div class="position-sticky pt-3 bg-dark vh-100">
         <ul class="nav flex-column px-3">
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" href="/lead-management-system/admin_dashboard.php">
               <i class="bi bi-house-door"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../manage_agents/manage_agents.php">
+            <a class="nav-link" href="/lead-management-system/manage_agents/manage_agents.php">
               <i class="bi bi-person-lines-fill"></i> Manage Agents
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../manage_leads/view_leads.php">
+            <a class="nav-link" href="/lead-management-system/manage_leads/view_leads.php">
               <i class="bi bi-list-task"></i> Manage Leads
             </a>
           </li>

@@ -29,9 +29,15 @@ if (!$result) {
     <meta charset="UTF-8">
     <title>View Leads | Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/lead-management-system/css/style.css">
 </head>
 <body>
-<div class="container mt-4">
+<?php include '../common/topbar.php'; ?>
+
+<div class="container-fluid">
+  <div class="row">
+    <?php include '../common/sidebar.php'; ?>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>
         <a href="../admin_dashboard.php" style="text-decoration: none; color: inherit;">
@@ -68,6 +74,7 @@ if (!$result) {
                     <td>
                         <a href="edit_leads.php?id=<?= urlencode($row['id']) ?>" class="btn btn-sm btn-warning">Edit</a>
                         <a href="delete_leads.php?id=<?= urlencode($row['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this lead?');">Delete</a>
+                        <a href="assign_to_agent.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary">Assign</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
@@ -78,6 +85,9 @@ if (!$result) {
         <?php endif; ?>
         </tbody>
     </table>
+</div>
+    </main>
+  </div>
 </div>
 </body>
 </html>

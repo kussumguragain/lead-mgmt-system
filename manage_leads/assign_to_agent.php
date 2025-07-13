@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     exit;
 }
 
-include '../config/config.php';
+include '../config/db.php';
 
 // Get the lead ID from query parameter
 $lead_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -39,33 +39,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agent_id'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Assign Lead to Agent</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lead-management-system/css/style.css">
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header">
-            <h4>Assign Lead to Agent</h4>
-        </div>
-        <div class="card-body">
-            <form method="post">
+<body>
+
+<?php include '../common/topbar.php'; ?>
+
+<div class="container-fluid">
+  <div class="row">
+    <?php include '../common/sidebar.php'; ?>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-lg-6">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4 class="mb-0">Assign Lead to Agent</h4>
+            </div>
+            <div class="card-body">
+              <form method="post">
                 <div class="mb-3">
-                    <label class="form-label">Select Agent</label>
-                    <select name="agent_id" class="form-select" required>
-                        <option value="">-- Choose Agent --</option>
-                        <?php foreach ($agents as $agent): ?>
-                            <option value="<?= $agent['id']; ?>"><?= htmlspecialchars($agent['name']); ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                  <label class="form-label">Select Agent</label>
+                  <select name="agent_id" class="form-select" required>
+                    <option value="">-- Choose Agent --</option>
+                    <?php foreach ($agents as $agent): ?>
+                      <option value="<?= $agent['id']; ?>"><?= htmlspecialchars($agent['name']); ?></option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Assign</button>
+                <button type="submit" class="btn btn-success">Assign</button>
                 <a href="view_leads.php" class="btn btn-secondary">Cancel</a>
-            </form>
+              </form>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </main>
+  </div>
 </div>
+
 </body>
 </html>

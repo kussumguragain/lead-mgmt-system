@@ -56,9 +56,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8" />
 <title>Add New Agent</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<style>
+  body {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+  }
+  .sidebar {
+    min-height: 100vh;
+    background-color: #343a40;
+  }
+  .sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  .sidebar a:hover {
+    background-color: #495057;
+  }
+  .sidebar .nav-link.active {
+    background-color: #007bff;
+  }
+  .content {
+    padding: 20px;
+  }
+</style>
+
 </head>
 <body>
-<div class="container mt-4" style="max-width: 600px;">
+<?php include '../common/topbar.php'; ?>
+
+<div class="container-fluid">
+  <div class="row">
+    <?php include '../common/sidebar.php'; ?>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content mt-4">
+
   <h2>Add New Agent</h2>
   <?php if ($msg): ?>
     <div class="alert alert-warning"><?= htmlspecialchars($msg) ?></div>
@@ -86,5 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </main>
+  </div>
+</div>
+
 </body>
 </html>
