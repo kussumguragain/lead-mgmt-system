@@ -43,8 +43,12 @@ $result = $conn->query($sql);
     Manage Agents
   </a>
 </h2>
+<div class="d-flex justify-content-end mb-3">
+  <a href="add_agent.php" class="btn btn-primary">Add New Agent</a>
+</div>
 
-  <a href="add_agent.php" class="btn btn-primary mb-3">Add New Agent</a>
+
+  <!-- <a href="add_agent.php" class="btn btn-primary mb-3">Add New Agent</a> -->
 
   <table class="table table-bordered table-hover">
     <thead class="table-light">

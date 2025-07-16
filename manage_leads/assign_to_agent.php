@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['agent_id'])) {
     $agent_id = intval($_POST['agent_id']);
 
-    $stmt = $conn->prepare("UPDATE leads SET assigned_to = ?, status = 'Assigned' WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE leads SET assigned_to = ? WHERE id = ?");
     $stmt->bind_param("ii", $agent_id, $lead_id);
 
     if ($stmt->execute()) {
