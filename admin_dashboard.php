@@ -8,6 +8,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
 
 include_once 'config/db.php';
 
+$leadData = [];
+$query = "SELECT DATE(created_at) AS date, COUNT(*) AS total FROM leads GROUP BY DATE(created_at) ORDER BY DATE(created_at)";
+$leadResult = $conn->query($query);
+
+$chartDates = [];
+$chartTotals = [];
+
+while ($row = $leadResult->fetch_assoc()) {
+    $chartDates[] = $row['date'];
+    $chartTotals[] = $row['total'];
+}
+
+
 $agentResult = $conn->query("SELECT COUNT(*) AS total_agents FROM users WHERE role = 'agent'");
 $agentRow = $agentResult->fetch_assoc();
 $totalAgents = $agentRow['total_agents'];
@@ -87,11 +100,33 @@ include 'common/topbar.php';
           </div>
         </div>
       </div>
+
+      <div class="row">
+     <div class="col-12 mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Leads Created Over Time</h5>
+      </div>
+      <div class="card-body">
+        <canvas id="leadsLineChart" height="80"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
     </main>
   </div>
 </div>
 
+
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const chartDates = <?= json_encode($chartDates) ?>;
+  const chartTotals = <?= json_encode($chartTotals) ?>;
+</script>
+<script src="js/script.js"></script>
+
 </body>
 </html>
