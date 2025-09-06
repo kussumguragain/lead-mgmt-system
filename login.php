@@ -106,7 +106,8 @@
         </form>
         <div class="footer-text">
             <p>Forgot password? <a href="#">Click here</a></p>
-            <p>New user? <a href="#">Contact Admin</a></p>
+            
+            <p>New user? <a href="mailto:admin@example.com">Contact Admin</a></p>
         </div>
     </div>
 </body>

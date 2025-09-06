@@ -15,7 +15,7 @@ if (!isset($_GET['id'])) {
 $lead_id = intval($_GET['id']);
 $user_id = $_SESSION['user_id'];
 
-// ✅ Handle Add Note
+//  Handle Add Note
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_note'])) {
     $note = trim($_POST['note'] ?? '');
     if (!empty($note)) {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_note'])) {
     }
 }
 
-// ✅ Handle Delete Notes
+// Handle Delete Notes
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_notes']) && !empty($_POST['note_ids'])) {
     $note_ids = $_POST['note_ids'];
     $placeholders = implode(',', array_fill(0, count($note_ids), '?'));
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_notes']) && !e
     $stmt->execute();
 }
 
-// ✅ Fetch Lead Details
+//  Fetch Lead Details
 $stmt = $conn->prepare("SELECT * FROM leads WHERE id = ? AND assigned_to = ?");
 $stmt->bind_param("ii", $lead_id, $user_id);
 $stmt->execute();
@@ -79,30 +79,42 @@ $lead = $result->fetch_assoc();
 
 
     <hr>
+<form action="update_lead_status.php" method="POST" class="mt-4">
+  <input type="hidden" name="lead_id" value="<?= $lead['id'] ?>">
 
-    <!-- 🔽 Place the update status form here -->
-    <form action="update_lead_status.php" method="POST" class="mt-4">
-      <input type="hidden" name="lead_id" value="<?= $lead['id'] ?>">
+  <!-- Lead Stage -->
+  <div class="mb-3">
+    <label for="lead_stage" class="form-label">Lead Stage</label>
+    <select name="lead_stage" id="lead_stage" class="form-select" required>
+      <option value="">-- Select Stage --</option>
+      <option value="New" <?= $lead['lead_stage'] === 'New' ? 'selected' : '' ?>>New</option>
+      <option value="Contacted" <?= $lead['lead_stage'] === 'Contacted' ? 'selected' : '' ?>>Contacted</option>
+      <option value="Converted" <?= $lead['lead_stage'] === 'Converted' ? 'selected' : '' ?>>Converted</option>
+      <option value="Lost" <?= $lead['lead_stage'] === 'Lost' ? 'selected' : '' ?>>Lost</option>
+    </select>
+  </div>
 
-      <div class="mb-3">
-        <label for="status" class="form-label">Status</label>
-        <select name="status" id="status" class="form-select" required>
-          <option value="">-- Select Status --</option>
-          <option value="New" <?= $lead['status'] === 'New' ? 'selected' : '' ?>>New</option>
-          <option value="Contacted" <?= $lead['status'] === 'Contacted' ? 'selected' : '' ?>>Contacted</option>
-          <option value="-Converted" <?= $lead['status'] === 'Converted' ? 'selected' : '' ?>>Converted</option>
-          <option value="Lost" <?= $lead['status'] === 'Lost' ? 'selected' : '' ?>>Lost</option>
-        </select>
-      </div>
+  <!-- Lead Status -->
+  <div class="mb-3">
+    <label for="status" class="form-label">Status</label>
+    <select name="status" id="status" class="form-select" required>
+      <option value="">-- Select Status --</option>
+      <option value="Hot" <?= $lead['status'] === 'Hot' ? 'selected' : '' ?>>Hot</option>
+      <option value="Warm" <?= $lead['status'] === 'Warm' ? 'selected' : '' ?>>Warm</option>
+      <option value="Cold" <?= $lead['status'] === 'Cold' ? 'selected' : '' ?>>Cold</option>
+    </select>
+  </div>
 
-      <div class="mb-3">
-        <label for="follow_up_date" class="form-label">Follow-Up Date</label>
-        <input type="date" name="follow_up_date" id="follow_up_date" class="form-control" value="<?= $lead['follow_up_date'] ?>">
-      </div>
+  <!-- Follow-up Date -->
+  <div class="mb-3">
+    <label for="follow_up_date" class="form-label">Follow-Up Date</label>
+    <input type="date" name="follow_up_date" id="follow_up_date" class="form-control" value="<?= $lead['follow_up_date'] ?>">
+  </div>
 
-      <button type="submit" class="btn btn-primary">Update Lead</button>
-    </form>
-    <!-- 🔽 Add Note Form -->
+  <button type="submit" class="btn btn-primary">Update Lead</button>
+</form>
+
+    <!-- Add Note Form -->
 <form method="POST" class="mt-4">
   <input type="hidden" name="lead_id" value="<?= $lead['id'] ?>">
 
@@ -116,7 +128,7 @@ $lead = $result->fetch_assoc();
 
 </form>
 
-<!-- 🔽 View Previous Notes -->
+<!-- View Previous Notes -->
 <?php
 $notesQuery = $conn->prepare("SELECT id, note, created_at FROM lead_notes WHERE lead_id = ? ORDER BY created_at DESC");
 $notesQuery->bind_param("i", $lead['id']);

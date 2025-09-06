@@ -9,8 +9,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'agent') {
 include_once 'config/db.php';
 
 // Count leads assigned to this agent (adjust table/column names to your DB)
-$agentId = $_SESSION['user_id'];
-$leadResult = $conn->query("SELECT COUNT(*) AS total_leads FROM leads WHERE id = $agentId");
+$agentId = (int)$_SESSION['user_id'];  // Make sure user_id is integer
+$leadResult = $conn->query("SELECT COUNT(*) AS total_leads FROM leads WHERE assigned_to = $agentId");
 $leadRow = $leadResult->fetch_assoc();
 $totalLeads = $leadRow['total_leads'];
 ?>
@@ -78,7 +78,19 @@ $totalLeads = $leadRow['total_leads'];
               <i class="bi bi-card-list"></i> View Leads
             </a>
           </li>
-          </li>
+  
+
+          <li class="nav-item">
+    <a class="nav-link" href="/lead-mgmt-system/lead_tracking/lead_tracking.php">
+        <i class="bi bi-graph-up-arrow me-2"></i> Lead Tracking
+      </a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/lead-mgmt-system/view_leads/manage_leads.php">
+          <i class="bi bi-kanban-fill"></i> Manage Leads
+        </a>
+      </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/lead-mgmt-system/agent_profile/my_profile.php">
              <i class="bi bi-person-circle"></i> My Profile

@@ -2,11 +2,11 @@
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'agent') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit;
 }
 
-include_once 'config/db.php';
+include_once '../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lead_id = $_POST['lead_id'] ?? '';

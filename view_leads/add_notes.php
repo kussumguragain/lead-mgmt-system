@@ -17,7 +17,7 @@ if (empty($lead_id)) {
     exit;
 }
 
-// ✅ Add Note Logic
+// Add Note Logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_note'])) {
     $note = trim($_POST['note'] ?? '');
 
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_note'])) {
     }
 }
 
-// ✅ Fetch Previous Notes
+//  Fetch Previous Notes
 $notesQuery = $conn->prepare("SELECT id, note, created_at FROM lead_notes WHERE lead_id = ? AND agent_id = ? ORDER BY created_at DESC");
 $notesQuery->bind_param("ii", $lead_id, $agent_id);
 $notesQuery->execute();

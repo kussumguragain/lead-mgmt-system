@@ -9,10 +9,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'agent') {
 
 include_once '../config/db.php'; // Adjust path if needed
 
-$agent_id = $_SESSION['user_id'];
+$agent_id = (int)$_SESSION['user_id'];
 
 // Fetch leads assigned to this agent
-$sql = "SELECT * FROM leads WHERE id = ?";
+$sql = "SELECT * FROM leads WHERE assigned_to = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $agent_id);
 $stmt->execute();
@@ -44,6 +44,7 @@ $result = $stmt->get_result();
         <th>Lead Name</th>
         <th>Contact</th>
         <th>Status</th>
+        <th>Lead Stage</th>
         <th>Follow-up Date</th>
         <th>Actions</th>
       </tr>
@@ -55,6 +56,7 @@ $result = $stmt->get_result();
         <td><?= htmlspecialchars($row['customer_name']) ?></td>
         <td><?= htmlspecialchars($row['phone']) ?></td>
         <td><?= htmlspecialchars($row['status']) ?></td>
+          <td><?= htmlspecialchars($row['lead_stage']) ?></td>
                <td><?= htmlspecialchars($row['follow_up_date']) ?></td>
         <td>
 <a href="lead_details.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">View</a>
